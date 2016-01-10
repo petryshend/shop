@@ -13,7 +13,7 @@ class ProductController extends Controller
             ->findAll();
 
         return $this->render(
-            'BackEndBundle:Default:index.html.twig',
+            'BackEndBundle:product:list.html.twig',
             [
                 'products' => $products,
             ]
