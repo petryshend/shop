@@ -1,3 +1,7 @@
 back_end_product_list:
     path:     /product/list
     defaults: { _controller: BackEndBundle:Product:list }
+
+back_end_product_new:
+    path:     /product/new
+    defaults: { _controller: BackEndBundle:Product:new }
