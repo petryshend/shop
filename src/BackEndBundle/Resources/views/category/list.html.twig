@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    here goes categories
+    {% for category in categories %}
+        <h3>{{ category.id }} {{ category.name }}</h3>
+        <a href="{{ path('back_end_category_edit', {'id': category.id}) }}">Edit</a>
+        <a href="{{ path('back_end_category_delete', {'id': category.id}) }}">Delete</a>
+        <hr>
+    {% endfor %}
 {% endblock %}

@@ -15,5 +15,17 @@ back_end_product_delete:
     defaults: { _controller: BackEndBundle:Product:delete }
 
 back_end_category_list:
-    path:    /category/list
+    path:     /category/list
     defaults: { _controller: BackEndBundle:Category:list }
+
+back_end_category_new:
+    path:     /category/new
+    defaults: { _controller: BackEndBundle:Category:new }
+
+back_end_category_edit:
+    path:     /category/{id}/edit
+    defaults: { _controller: BackEndBundle:Category:edit }
+
+back_end_category_delete:
+    path:     /category/{id}/delete
+    defaults: { _controller: BackEndBundle:Category:delete }

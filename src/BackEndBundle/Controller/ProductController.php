@@ -37,7 +37,7 @@ class ProductController extends Controller
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->persistProduct($product);
             return $this->redirectToRoute('back_end_product_list');
         }
@@ -67,7 +67,7 @@ class ProductController extends Controller
         }
 
         return $this->render(
-            '@BackEnd/product/edit.html.twig',
+            '@BackEnd/product/new.html.twig',
             [
                 'form' => $form->createView(),
             ]
