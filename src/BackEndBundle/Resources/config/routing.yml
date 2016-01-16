@@ -13,3 +13,7 @@ back_end_product_edit:
 back_end_product_delete:
     path:     /product/{id}/delete
     defaults: { _controller: BackEndBundle:Product:delete }
+
+back_end_category_list:
+    path:    /category/list
+    defaults: { _controller: BackEndBundle:Category:list }

@@ -1,0 +1,20 @@
+BackEndBundle\Entity\Category:
+    type: entity
+    table: null
+    repositoryClass: BackEndBundle\Repository\CategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+    oneToMany:
+        products:
+            targetEntity: BackEndBundle\Entity\Product
+            mappedBy: category
+    lifecycleCallbacks: {  }
+

@@ -19,4 +19,11 @@ BackEndBundle\Entity\Product:
         description:
             type: text
             nullable: true
+    manyToOne:
+        category:
+            targetEntity: BackEndBundle\Entity\Category
+            inversedBy: products
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }
