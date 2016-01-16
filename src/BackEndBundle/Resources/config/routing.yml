@@ -5,3 +5,11 @@ back_end_product_list:
 back_end_product_new:
     path:     /product/new
     defaults: { _controller: BackEndBundle:Product:new }
+
+back_end_product_edit:
+    path:     /product/{id}/edit
+    defaults: { _controller: BackEndBundle:Product:edit }
+
+back_end_product_delete:
+    path:     /product/{id}/delete
+    defaults: { _controller: BackEndBundle:Product:delete }

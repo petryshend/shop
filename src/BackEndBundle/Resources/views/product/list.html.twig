@@ -8,6 +8,9 @@
         <h3>{{ product.id }} {{ product.name }}</h3>
         <p>{{ product.description }}</p>
         <p>{{ product.price }}</p>
+        <a href="{{ path('back_end_product_edit', {'id': product.id}) }}">Edit</a> |
+        <a href="{{ path('back_end_product_delete', {'id': product.id}) }}">Delete</a>
+        <hr>
 
     {% endfor %}
 
