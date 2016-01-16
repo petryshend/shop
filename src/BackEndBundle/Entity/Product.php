@@ -28,7 +28,7 @@ class Product
     private $description;
 
     /**
-6     * @var Category
+     * @var Category
      */
     private $category;
 
