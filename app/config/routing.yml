@@ -1,3 +1,7 @@
+front_end:
+    resource: "@FrontEndBundle/Resources/config/routing.yml"
+    prefix:   /
+
 back_end:
     resource: "@BackEndBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /god
