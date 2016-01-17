@@ -2,6 +2,7 @@
 
 namespace BackEndBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,10 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
+            ->add('category', EntityType::class, [
+                'class' => 'BackEndBundle\Entity\Category',
+                'choice_label' => 'name'
+            ])
             ->add('save', SubmitType::class)
         ;
     }
