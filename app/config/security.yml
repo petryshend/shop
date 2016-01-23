@@ -1,24 +1,32 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
-
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        BackEndBundle\Entity\User: bcrypt
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
     providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, user_db]
         in_memory:
-            memory: ~
-
+            memory:
+                users:
+                    admin: { password: admin, roles: ROLE_ADMIN }
+        user_db:
+            entity: { class: BackEndBundle:User, property: username }
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
         main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            pattern: /.*
+            form_login:
+                login_path: /god/login
+                check_path: /god/login_check
+                default_target_path: /god/product/list #TODO: change this
+            logout:
+                path:   /god/logout
+                target: /god/product/list #TODO: change this
+            security: true
+            anonymous: true
+    access_control:
+        - { path: /god/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /god/user, roles: ROLE_ADMIN }
+        - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

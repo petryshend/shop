@@ -1,3 +1,13 @@
+login_route:
+    path:     /login
+    defaults: { _controller: BackEndBundle:Security:login }
+
+login_check:
+    path:     /login_check
+
+logout:
+    path:     /logout
+
 back_end_product_list:
     path:     /product/list
     defaults: { _controller: BackEndBundle:Product:list }
@@ -29,3 +39,7 @@ back_end_category_edit:
 back_end_category_delete:
     path:     /category/{id}/delete
     defaults: { _controller: BackEndBundle:Category:delete }
+
+back_end_user_list:
+    path:     /user/list
+    defaults: { _controller: BackEndBundle:User:list }
