@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    {% include 'BackEndBundle:partial:_header.html.twig' %}
     {% for category in categories %}
         <h3>{{ category.id }} {{ category.name }}</h3>
         <a href="{{ path('back_end_category_edit', {'id': category.id}) }}">Edit</a>
