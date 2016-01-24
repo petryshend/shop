@@ -18,8 +18,19 @@
                     <a href="{{ path('back_end_product_new') }}">New Product</a> ||
                     <a href="{{ path('back_end_category_list') }}">Categories</a> |
                     <a href="{{ path('back_end_category_new') }}">New Category</a> ||
-                    <a href="{{ path('back_end_user_list') }}">Users</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('back_end_user_list') }}">Users</a> |
+                        <a href="{{ path('back_end_user_new') }}">New User</a>
+                    {% endif %}
                 </div>
+                {% if app.user %}
+                    <p>
+                        Logged in as <b>{{ app.user.username }}</b>
+                        <a href="{{ path('logout') }}">Logout</a>
+                    </p>
+                {% else %}
+                    <a href="{{ path('login_route') }}">Login</a>
+                {% endif %}
                 <hr>
             </div>
             {% block body %}{% endblock %}

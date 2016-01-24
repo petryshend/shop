@@ -43,3 +43,7 @@ back_end_category_delete:
 back_end_user_list:
     path:     /user/list
     defaults: { _controller: BackEndBundle:User:list }
+
+back_end_user_new:
+    path:     /user/new
+    defaults: { _controller: BackEndBundle:User:new }
