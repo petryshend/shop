@@ -75,12 +75,14 @@ class ProductController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(Request $request)
     {
-        $product = $this->findProduct($id);
+        $productId = $request->get('product_id');
+
+        $product = $this->findProduct($productId);
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);
         $em->flush();

@@ -75,12 +75,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(Request $request)
     {
-        $category = $this->findCategory($id);
+        $categoryId = $request->get('category_id');
+        $category = $this->findCategory($categoryId);
         $em = $this->getDoctrine()->getManager();
         $em->remove($category);
         $em->flush();

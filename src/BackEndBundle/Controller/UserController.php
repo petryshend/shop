@@ -49,14 +49,41 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Response
+     */
     public function editAction(Request $request, $id)
     {
+        $user = $this->findUser($id);
 
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->persistUser($user);
+            return $this->redirectToRoute('back_end_user_list');
+        }
+        return $this->render(
+            '@BackEnd/user/new.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
-    public function deleteAction($id)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function deleteAction(Request $request)
     {
-
+        $userId = $request->get('user_id');
+        $user = $this->findUser($userId);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('back_end_user_list');
     }
 
     /**
@@ -67,5 +94,18 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
+    }
+
+    private function findUser($id)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository('BackEndBundle:User')
+            ->find($id);
+
+        if (null == $user) {
+            throw $this->createNotFoundException(printf('User with id %s not found', $id));
+        }
+
+        return $user;
     }
 }

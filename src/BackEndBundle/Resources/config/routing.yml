@@ -21,7 +21,8 @@ back_end_product_edit:
     defaults: { _controller: BackEndBundle:Product:edit }
 
 back_end_product_delete:
-    path:     /product/{id}/delete
+    path:     /product/delete
+    methods: [POST]
     defaults: { _controller: BackEndBundle:Product:delete }
 
 back_end_category_list:
@@ -37,7 +38,8 @@ back_end_category_edit:
     defaults: { _controller: BackEndBundle:Category:edit }
 
 back_end_category_delete:
-    path:     /category/{id}/delete
+    path:     /category/delete
+    methods: [POST]
     defaults: { _controller: BackEndBundle:Category:delete }
 
 back_end_user_list:
@@ -47,3 +49,12 @@ back_end_user_list:
 back_end_user_new:
     path:     /user/new
     defaults: { _controller: BackEndBundle:User:new }
+
+back_end_user_edit:
+    path:     /user/{id}/edit
+    defaults: { _controller: BackEndBundle:User:edit }
+
+back_end_user_delete:
+    path:     /user/delete
+    methods: [POST]
+    defaults: { _controller: BackEndBundle:User:delete }

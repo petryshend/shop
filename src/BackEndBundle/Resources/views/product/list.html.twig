@@ -10,7 +10,12 @@
         <p>{{ product.price }}</p>
         <p>Category: {{ product.category.name }}</p>
         <a href="{{ path('back_end_product_edit', {'id': product.id}) }}">Edit</a> |
-        <a href="{{ path('back_end_product_delete', {'id': product.id}) }}">Delete</a>
+
+        <form action="{{ path('back_end_product_delete') }}" method="POST">
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <input type="submit" value="Delete">
+        </form>
+        
         <hr>
 
     {% endfor %}
