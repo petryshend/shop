@@ -4,6 +4,9 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    backend.twig_extensions:
+        class: BackEndBundle\Twig\BackEndExtension
+        public: false
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
