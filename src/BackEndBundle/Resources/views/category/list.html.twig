@@ -2,13 +2,35 @@
 
 {% block body %}
     {% include 'BackEndBundle:partial:_header.html.twig' %}
-    {% for category in categories %}
-        <h3>{{ category.id }} {{ category.name }}</h3>
-        <a href="{{ path('back_end_category_edit', {'id': category.id}) }}">Edit</a>
-        <form action="{{ path('back_end_category_delete') }}" method="POST">
-            <input type="hidden" name="category_id" value="{{ category.id }}">
-            <input type="submit" value="Delete">
-        </form>
-        <hr>
-    {% endfor %}
+    <a class="btn btn-primary" href="{{ path('back_end_category_new') }}">
+        New Category
+    </a>
+    <table class="table">
+        <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a class="btn btn-default pull-left" href="{{ path('back_end_category_edit', {'id': category.id}) }}">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
+                    <div class="pull-left">
+                        <form action="{{ path('back_end_category_delete') }}" method="POST">
+                            <input type="hidden" name="product_id" value="{{ category.id }}">
+                            <button class="btn btn-danger" type="submit">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
