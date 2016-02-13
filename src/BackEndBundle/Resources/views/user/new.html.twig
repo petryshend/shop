@@ -2,5 +2,22 @@
 
 {% block body %}
   {% include 'BackEndBundle:partial:_header.html.twig' %}
-  {{ form(form) }}
+  {{ form_start(form) }}
+  <div class="form-group {{ form_errors(form.username) ? 'has-error' : '' }}">
+    {{ form_label(form.username) }}
+    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+    <span class="help-block">{{ form_errors(form.username) }}</span>
+  </div>
+  <div class="form-group {{ form_errors(form.password.first) ? 'has-error' : '' }}">
+    {{ form_label(form.password.first) }}
+    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+    <span class="help-block">{{ form_errors(form.password.first) }}</span>
+  </div>
+  <div class="form-group {{ form_errors(form.password.second) ? 'has-error' : '' }}">
+    {{ form_label(form.password.second) }}
+    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+    <span class="help-block">{{ form_errors(form.password.second) }}</span>
+  </div>
+  <button type="submit" class="btn btn-default">Save</button>
+  {{ form_end(form) }}
 {% endblock %}
