@@ -18,6 +18,11 @@
     {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
     <span class="help-block">{{ form_errors(form.price) }}</span>
   </div>
+  <div class="form-group {{ form_errors(form.image_url) ? 'has-error' : '' }}">
+    {{ form_label(form.image_url) }}
+    {{ form_widget(form.image_url, {'attr': {'class': 'form-control'}}) }}
+    <span class="help-block">{{ form_errors(form.image_url) }}</span>
+  </div>
   <div class="form-group {{ form_errors(form.category) ? 'has-error' : '' }}">
     {{ form_label(form.category) }}
     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}

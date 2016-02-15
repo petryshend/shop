@@ -19,6 +19,9 @@ BackEndBundle\Entity\Product:
         description:
             type: text
             nullable: true
+        image_url:
+            type: text
+            nullable: true
     manyToOne:
         category:
             targetEntity: BackEndBundle\Entity\Category

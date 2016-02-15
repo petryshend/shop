@@ -2,8 +2,10 @@
 
 namespace BackEndBundle\Form;
 
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +21,7 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
+            ->add('image_url', UrlType::class)
             ->add('category', EntityType::class, [
                 'class' => 'BackEndBundle\Entity\Category',
                 'choice_label' => 'name'
