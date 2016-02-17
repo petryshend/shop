@@ -16,17 +16,18 @@
         <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
         <td>
-          <a class="btn btn-default pull-left" href="{{ path('back_end_user_edit', {'id': user.id}) }}">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-          </a>
-          <div class="pull-left">
-            <form action="{{ path('back_end_user_delete') }}" method="POST">
-              <input type="hidden" name="product_id" value="{{ user.id }}">
+          <form action="{{ path('back_end_user_delete') }}" method="POST">
+            <input type="hidden" name="product_id" value="{{ user.id }}">
+            <div class="btn-group">
+              <a class="btn btn-default pull-left" href="{{ path('back_end_user_edit', {'id': user.id}) }}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"> Edit</span>
+              </a>
               <button class="btn btn-danger" type="submit">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"> Delete</span>
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
+
         </td>
       </tr>
     {% endfor %}

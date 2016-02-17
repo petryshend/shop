@@ -1,36 +1,36 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    {% include 'BackEndBundle:partial:_header.html.twig' %}
-    <a class="btn btn-primary" href="{{ path('back_end_category_new') }}">
-        New Category
-    </a>
-    <table class="table">
-        <thead>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Actions</th>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <a class="btn btn-default pull-left" href="{{ path('back_end_category_edit', {'id': category.id}) }}">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    </a>
-                    <div class="pull-left">
-                        <form action="{{ path('back_end_category_delete') }}" method="POST">
-                            <input type="hidden" name="product_id" value="{{ category.id }}">
-                            <button class="btn btn-danger" type="submit">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+  {% include 'BackEndBundle:partial:_header.html.twig' %}
+  <a class="btn btn-primary" href="{{ path('back_end_category_new') }}">
+    New Category
+  </a>
+  <table class="table">
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    {% for category in categories %}
+      <tr>
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>
+          <form action="{{ path('back_end_category_delete') }}" method="POST">
+            <input type="hidden" name="product_id" value="{{ category.id }}">
+            <div class="btn-group">
+              <a class="btn btn-default pull-left" href="{{ path('back_end_category_edit', {'id': category.id}) }}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"> Edit</span>
+              </a>
+              <button class="btn btn-danger" type="submit">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"> Delete</span>
+              </button>
+            </div>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
