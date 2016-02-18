@@ -17,12 +17,12 @@
     <tbody>
     {% for product in products %}
       <tr>
-        <td>{{ product.id }}</td>
-        <td><img class="product-thumbnail" src="{{ product.imageUrl }}" alt="product image"></td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category.name }}</td>
-        <td>{{ product.price }}</td>
-        <td>
+        <td class="col-md-1">{{ product.id }}</td>
+        <td class="col-md-1"><img class="product-thumbnail" src="{{ product.imageUrl }}" alt="product image"></td>
+        <td class="col-md-3">{{ product.name }}</td>
+        <td class="col-md-2">{{ product.category.name }}</td>
+        <td class="col-md-2">{{ product.price }}</td>
+        <td class="col-md-3">
           <form action="{{ path('back_end_product_delete') }}" method="POST">
             <input type="hidden" name="product_id" value="{{ product.id }}">
             <div class="btn-group">

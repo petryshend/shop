@@ -13,9 +13,9 @@
     <tbody>
     {% for user in users %}
       <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.username }}</td>
-        <td>
+        <td class="col-md-1">{{ user.id }}</td>
+        <td class="col-md-8">{{ user.username }}</td>
+        <td class="col-md-3">
           <form action="{{ path('back_end_user_delete') }}" method="POST">
             <input type="hidden" name="product_id" value="{{ user.id }}">
             <div class="btn-group">
