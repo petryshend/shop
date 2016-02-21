@@ -11,19 +11,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
+    private $sortFiels = ['id', 'name', 'category'];
+
     /**
+     * @param Request $request
      * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
+        if (!$page = $request->get('page')) {
+            $page = 1;
+        }
+
+        $sortOrder = $request->get('direction') === 'desc' ? 'desc' : 'asc';
+
+        $sortField = in_array($request->get('sort'), $this->sortFiels) ? $request->get('sort') : 'id';
+
         $products = $this->getDoctrine()
             ->getRepository('BackEndBundle:Product')
-            ->findAll();
+            ->findBy([], [$sortField => $sortOrder]);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($products, $page, 5);
 
         return $this->render(
             'BackEndBundle:product:list.html.twig',
             [
                 'products' => $products,
+                'pagination' => $pagination,
             ]
         );
     }

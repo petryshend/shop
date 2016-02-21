@@ -2,20 +2,22 @@
 
 {% block body %}
   {% include 'BackEndBundle:partial:_header.html.twig' %}
+
   <a class="btn btn-primary" href="{{ path('back_end_product_new') }}">
     New Product
   </a>
+  <span>Total products: {{ pagination.getTotalItemCount }}</span>
   <table class="table">
     <thead>
-    <th>Id</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'product.id') }}</th>
     <th>Image</th>
-    <th>Name</th>
-    <th>Category</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Name', 'product.name') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Category', 'product.category.name') }}</th>
     <th>Price</th>
     <th>Actions</th>
     </thead>
     <tbody>
-    {% for product in products %}
+    {% for product in pagination %}
       <tr>
         <td class="col-md-1">{{ product.id }}</td>
         <td class="col-md-1"><img class="product-thumbnail" src="{{ product.imageUrl }}" alt="product image"></td>
@@ -39,4 +41,7 @@
     {% endfor %}
     </tbody>
   </table>
+  <div class="row">
+    {{ knp_pagination_render(pagination) }}
+  </div>
 {% endblock %}
