@@ -5,3 +5,18 @@
 .product-thumbnail {
     width: 50px;
 }
+
+.product-tile {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.product-tile img {
+    max-width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
+    margin: auto;
+}
