@@ -27,6 +27,7 @@ class LoadProductsData extends AbstractFixture implements OrderedFixtureInterfac
                 $this->getReference('category' . mt_rand(0, LoadCategoriesData::CATEGORIES_COUNT - 1))
             );
             $product->setImageUrl('http://placehold.it/300x300');
+            $product->setRating(rand(1, 5));
 
             $manager->persist($product);
             $manager->flush();

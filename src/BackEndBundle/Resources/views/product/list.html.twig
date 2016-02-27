@@ -12,8 +12,9 @@
     <th>{{ knp_pagination_sortable(pagination, 'Id', 'product.id') }}</th>
     <th>Image</th>
     <th>{{ knp_pagination_sortable(pagination, 'Name', 'product.name') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Rating', 'product.rating') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Category', 'product.category.name') }}</th>
-    <th>Price</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Price', 'product.price') }}</th>
     <th>Actions</th>
     </thead>
     <tbody>
@@ -21,9 +22,10 @@
       <tr>
         <td class="col-md-1">{{ product.id }}</td>
         <td class="col-md-1"><img class="product-thumbnail" src="{{ product.imageUrl }}" alt="product image"></td>
-        <td class="col-md-3">{{ product.name }}</td>
+        <td class="col-md-2">{{ product.name }}</td>
+        <td class="col-md-2">{{ product.rating }}</td>
         <td class="col-md-2">{{ product.category.name }}</td>
-        <td class="col-md-2">{{ product.price }}</td>
+        <td class="col-md-1">{{ product.price }}</td>
         <td class="col-md-3">
           <form action="{{ path('back_end_product_delete') }}" method="POST">
             <input type="hidden" name="product_id" value="{{ product.id }}">

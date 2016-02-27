@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    private $sortFiels = ['id', 'name', 'category'];
+    private $sortFiels = ['id', 'name', 'category', 'rating', 'price'];
 
     /**
      * @param Request $request
@@ -24,8 +24,7 @@ class ProductController extends Controller
         }
 
         $sortOrder = $request->get('direction') === 'desc' ? 'desc' : 'asc';
-
-        $sortField = in_array($request->get('sort'), $this->sortFiels) ? $request->get('sort') : 'id';
+        $sortField = $this->getSortField($request);
 
         $products = $this->getDoctrine()
             ->getRepository('BackEndBundle:Product')
@@ -129,5 +128,18 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($product);
         $em->flush();
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    private function getSortField($request)
+    {
+        $sortField = explode('.', $request->get('sort'))[1];
+        if (in_array($sortField, $this->sortFiels)) {
+            return $sortField;
+        }
+        return 'id';
     }
 }

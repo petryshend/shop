@@ -22,6 +22,9 @@ BackEndBundle\Entity\Product:
         image_url:
             type: text
             nullable: true
+        rating:
+            type: integer
+            nullable: true
     manyToOne:
         category:
             targetEntity: BackEndBundle\Entity\Category

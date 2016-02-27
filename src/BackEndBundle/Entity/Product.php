@@ -166,4 +166,33 @@ class Product
     {
         return $this->image_url;
     }
+    /**
+     * @var integer
+     */
+    private $rating;
+
+
+    /**
+     * Set rating
+     *
+     * @param integer $rating
+     *
+     * @return Product
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return integer
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
 }
