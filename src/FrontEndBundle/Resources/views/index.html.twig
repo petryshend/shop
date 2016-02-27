@@ -16,7 +16,8 @@
         <div class="product-tile">
           <img src="{{ product.imageUrl }}" alt="{{ product.name }}">
           {{ product.name }}
-          {{ product.rating|rating|raw }}
+          <div class="rating-stars">{{ product.rating|rating|raw }}</div>
+          <span class="price">{{ product.price|price|raw }}</span>
         </div>
       </div>
     {% if i % products_in_row == products_in_row - 1 %}

@@ -24,7 +24,8 @@ class FrontEndExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('rating', [$this, 'rating'])
+            new Twig_SimpleFilter('rating', [$this, 'rating']),
+            new Twig_SimpleFilter('price', [$this, 'price'])
         ];
     }
 
@@ -34,7 +35,7 @@ class FrontEndExtension extends \Twig_Extension
      */
     public function rating($rating, $ratingsCount = 0)
     {
-        $html = '<div class="rating-stars">';
+        $html = '';
         for ($i = 0; $i < $rating; $i++) {
             $html .= '<span class="glyphicon glyphicon-star star-filled"></span>';
         }
@@ -44,12 +45,19 @@ class FrontEndExtension extends \Twig_Extension
         if (!$ratingsCount) {
             $html .= '<span class="ratings-count">(No ratings)</span>';
         } else {
-            $html .= printf('<span class="ratings-count">(%d)</span>', $ratingsCount);
+            $html .= sprintf('<span class="ratings-count">(%d)</span>', $ratingsCount);
         }
 
-        $html .= '</div>';
-
         return $html;
+    }
+
+    /**
+     * @param $price
+     * @return string
+     */
+    public function price($price)
+    {
+        return sprintf('<span class="glyphicon glyphicon-usd"></span>%.2f', $price);
     }
 
     /**

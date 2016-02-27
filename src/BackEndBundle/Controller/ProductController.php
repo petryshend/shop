@@ -136,10 +136,13 @@ class ProductController extends Controller
      */
     private function getSortField($request)
     {
-        $sortField = explode('.', $request->get('sort'))[1];
+        $sortField = 'id';
+        if ($request->get('sort')) {
+            $sortField = explode('.', $request->get('sort'))[1];
+        }
         if (in_array($sortField, $this->sortFiels)) {
             return $sortField;
         }
-        return 'id';
+        return $sortField;
     }
 }

@@ -34,3 +34,8 @@
     font-size: 12px;
     font-style: italic;
 }
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+}
