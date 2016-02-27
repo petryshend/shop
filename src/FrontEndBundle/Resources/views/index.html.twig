@@ -16,6 +16,7 @@
         <div class="product-tile">
           <img src="{{ product.imageUrl }}" alt="{{ product.name }}">
           {{ product.name }}
+          {{ product.rating|rating|raw }}
         </div>
       </div>
     {% if i % products_in_row == products_in_row - 1 %}

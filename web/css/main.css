@@ -20,3 +20,17 @@
     display: block;
     margin: auto;
 }
+
+.star-filled {
+    color: #2aabd2;
+}
+
+.star-not-filled {
+    color: #8c8c8c;
+}
+
+.ratings-count {
+    color: #8c8c8c;
+    font-size: 12px;
+    font-style: italic;
+}

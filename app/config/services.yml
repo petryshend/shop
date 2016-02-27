@@ -10,3 +10,10 @@ services:
         arguments: ["@service_container"]
         tags:
             - { name: twig.extension }
+
+    frontend.twig_extensions:
+        class: FrontEndBundle\Twig\FrontEndExtension
+        public: false
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
