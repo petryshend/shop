@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
+    /** @var string[] */
     private $sortFiels = ['id', 'name', 'category', 'rating', 'price'];
 
     /**
