@@ -5,14 +5,15 @@
   <a class="btn btn-primary" href="{{ path('back_end_category_new') }}">
     New Category
   </a>
+  <span>Total cateogories: {{ pagination.getTotalItemCount }}</span>
   <table class="table">
     <thead>
-    <th>Id</th>
-    <th>Name</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'category.id') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Name', 'category.name') }}</th>
     <th>Actions</th>
     </thead>
     <tbody>
-    {% for category in categories %}
+    {% for category in pagination %}
       <tr>
         <td class="col-md-1">{{ category.id }}</td>
         <td class="col-md-8">{{ category.name }}</td>

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     /** @var string[] */
-    private $sortFiels = ['id', 'name', 'category', 'rating', 'price'];
+    private $sortFields = ['id', 'name', 'category', 'rating', 'price'];
 
     /**
      * @param Request $request
@@ -141,7 +141,7 @@ class ProductController extends Controller
         if ($request->get('sort')) {
             $sortField = explode('.', $request->get('sort'))[1];
         }
-        if (in_array($sortField, $this->sortFiels)) {
+        if (in_array($sortField, $this->sortFields)) {
             return $sortField;
         }
         return $sortField;

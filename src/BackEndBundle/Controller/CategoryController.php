@@ -11,19 +11,33 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
+    /** @var string */
+    private $sortFields = ['id', 'name'];
+
     /**-
+     * @param Request $request
      * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
+        if (!$page = $request->get('page')) {
+            $page = 1;
+        }
+
+        $sortOrder = $request->get('direction') === 'desc' ? 'desc' : 'asc';
+        $sortField = $this->getSortField($request);
+
         $categories = $this->getDoctrine()
             ->getRepository('BackEndBundle:Category')
-            ->findAll();
+            ->findBy([], [$sortField => $sortOrder]);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($categories, $page, 5);
 
         return $this->render(
             '@BackEnd/category/list.html.twig',
             [
-                'categories' => $categories,
+                'pagination' => $pagination,
             ]
         );
     }
@@ -113,5 +127,21 @@ class CategoryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($category);
         $em->flush();
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    private function getSortField($request)
+    {
+        $sortField = 'id';
+        if ($request->get('sort')) {
+            $sortField = explode('.', $request->get('sort'))[1];
+        }
+        if (in_array($sortField, $this->sortFields)) {
+            return $sortField;
+        }
+        return $sortField;
     }
 }
