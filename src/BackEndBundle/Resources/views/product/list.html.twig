@@ -6,7 +6,6 @@
   <a class="btn btn-primary" href="{{ path('back_end_product_new') }}">
     New Product
   </a>
-  <span>Total products: {{ pagination.getTotalItemCount }}</span>
   <table class="table">
     <thead>
     <th>{{ knp_pagination_sortable(pagination, 'Id', 'product.id') }}</th>
@@ -44,6 +43,19 @@
     </tbody>
   </table>
   <div class="row">
-    {{ knp_pagination_render(pagination) }}
+    <div class="col-md-6">
+      {{ knp_pagination_render(pagination) }}
+    </div>
+    <div class="col-md-3">
+      <span>Total products: {{ pagination.getTotalItemCount }}</span>
+    </div>
+    <div class="col-md-3">
+      <label for="items-per-page">Products per page</label>
+      <select name="items-per-page" id="items-per-page" class="form-control">
+        <option value="5" {{ itemsPerPage == 5 ? 'selected' : '' }}>5</option>
+        <option value="10" {{ itemsPerPage == 10 ? 'selected' : '' }}>10</option>
+        <option value="20" {{ itemsPerPage == 20 ? 'selected' : '' }}>20</option>
+      </select>
+    </div>
   </div>
 {% endblock %}

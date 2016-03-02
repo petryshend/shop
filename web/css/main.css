@@ -39,3 +39,8 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+#items-per-page {
+    width:auto;
+    display:inline-block;
+}

@@ -24,6 +24,10 @@ class ProductController extends Controller
             $page = 1;
         }
 
+        if (!$itemsPerPage = $request->get('items-per-page')) {
+            $itemsPerPage = 10;
+        }
+
         $sortOrder = $request->get('direction') === 'desc' ? 'desc' : 'asc';
         $sortField = $this->getSortField($request);
 
@@ -32,13 +36,14 @@ class ProductController extends Controller
             ->findBy([], [$sortField => $sortOrder]);
 
         $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($products, $page, 5);
+        $pagination = $paginator->paginate($products, $page, $itemsPerPage);
 
         return $this->render(
             'BackEndBundle:product:list.html.twig',
             [
                 'products' => $products,
                 'pagination' => $pagination,
+                'itemsPerPage' => $itemsPerPage,
             ]
         );
     }

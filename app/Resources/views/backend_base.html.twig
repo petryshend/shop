@@ -17,8 +17,10 @@
         <div class="container">
             {% block body %}{% endblock %}
             {% block javascripts %}
-                <script href="{{ asset('js/jquery-2.2.0.js') }}"></script>
-                <script href="{{ asset('js/bootstrap.js') }}"></script>
+                <script src="{{ asset('js/jquery-2.2.0.js') }}"></script>
+                <script src="{{ asset('js/bootstrap.js') }}"></script>
+                <script src="{{ asset('js/jquery.query-object.js') }}"></script>
+                <script src="{{ asset('js/scripts.js') }}"></script>
             {% endblock %}
         </div>
     </body>
