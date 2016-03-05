@@ -1,11 +1,7 @@
 {% extends '::frontend_base.html.twig' %}
 
 {% block body %}
-
-  <div class="jumbotron">
-    <h1>This is shop!</h1>
-  </div>
-
+  {% include 'FrontEndBundle:partial:_header.html.twig' %}
   {% set products_in_row = 4 %}
   {% set max_columns = 12 %}
   {% for i, product in products %}
