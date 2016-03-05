@@ -1,3 +1,7 @@
 front_end_homepage:
     path:     /
     defaults: { _controller: FrontEndBundle:FrontEnd:index }
+
+front_end_product_page:
+    path: /product/{id}
+    defaults: { _controller: FrontEndBundle:FrontEnd:productPage }
