@@ -3,7 +3,6 @@
 namespace FrontEndBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass;
 use Symfony\Component\HttpFoundation\Response;
 
 class FrontEndController extends Controller

@@ -5,3 +5,15 @@ front_end_homepage:
 front_end_product_page:
     path: /product/{id}
     defaults: { _controller: FrontEndBundle:FrontEnd:productPage }
+
+front_end_cart_add:
+    path: /cart/add
+    methods: [POST]
+    defaults: { _controller: FrontEndBundle:Cart:addToCart }
+    condition: "request.isXMLHttpRequest()"
+
+front_end_cart_get:
+    path: /cart/get
+    methods: [POST]
+    defaults: { _controller: FrontEndBundle:Cart:getCart }
+    condition: "request.isXMLHttpRequest()"
