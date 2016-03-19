@@ -11,6 +11,7 @@
             <div class="rating-stars">{{ product.rating|rating|raw }}</div>
             <span class="price">{{ product.price|price|raw }}</span>
             <div>
+                <input type="hidden" name="selected-product" value="{{ product.id }}">
                 <button id="add-to-cart-button" class="btn btn-success">Add to cart</button>
                 <button id="get-cart-button" class="btn btn-warning">GET CART</button>
             </div>

@@ -6,9 +6,14 @@ $(function() {
     });
 
     $('#add-to-cart-button').on('click', function() {
+        var productId = $('input[name=selected-product]').val();
         $.ajax({
             url: '/cart/add',
-            type: 'POST'
+            type: 'POST',
+            data: {
+                productId: productId,
+                quantity: 1
+            }
         }).done(function(data) {
             console.log(data);
         }).fail(function() {

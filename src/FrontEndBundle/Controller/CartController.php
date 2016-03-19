@@ -13,15 +13,36 @@ class CartController extends Controller
     {
         $session = $request->getSession();
 
-        $session->set('name', 'Emanuil');
+        $productId = $request->get('productId');
+        $quantity = intval($request->get('quantity'));
 
-        return new Response('Name set');
+        $cartItems = json_decode($session->get('cart'), true);
+
+        if (!$cartItems) {
+            $cartItems = [];
+        }
+        $cartProductIds = array_map(function($entry) {
+            return $entry['productId'];
+        }, $cartItems);
+
+        $key = array_search($productId, $cartProductIds);
+        if ($key !== false) {
+            $cartItems[$key]['quantity'] = intval($cartItems[$key]['quantity']) + 1;
+        } else {
+            array_push($cartItems, ['productId' => $productId, 'quantity' => $quantity]);
+        }
+
+        $updatedItems = json_encode($cartItems);
+
+        $session->set('cart', $updatedItems);
+
+        return new Response('Item added');
     }
 
     public function getCartAction(Request $request)
     {
         $session = $request->getSession();
 
-        return new Response($session->get('name'));
+        return new Response($session->get('cart'));
     }
 }
