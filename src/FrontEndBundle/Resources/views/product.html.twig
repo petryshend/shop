@@ -2,18 +2,24 @@
 
 {% block body %}
     {% include 'FrontEndBundle:partial:_header.html.twig' %}
-    <div class="row">
-        <div class="col-md-8">
-            <img src="{{ product.imageUrl }}" alt="{{ product.name }}">
-        </div>
-        <div class="col-md-4">
-            <h3>{{ product.name }}</h3>
-            <div class="rating-stars">{{ product.rating|rating|raw }}</div>
-            <span class="price">{{ product.price|price|raw }}</span>
-            <div>
-                <input type="hidden" name="selected-product" value="{{ product.id }}">
-                <button id="add-to-cart-button" class="btn btn-success">Add to cart</button>
-                <button id="get-cart-button" class="btn btn-warning">GET CART</button>
+    <div class="panel panel-info">
+        <h2 class="panel-heading">
+            {{ product.name }}
+            <span class="pull-right">{{ product.price|price|raw }}</span>
+        </h2>
+        <div class="row product-actions">
+            <div class="col-md-8">
+                <img class="product-big-image" src="{{ product.imageUrl }}" alt="{{ product.name }}">
+            </div>
+            <div class="col-md-4">
+                <h3>{{ product.name }}</h3>
+                <div class="rating-stars">{{ product.rating|rating|raw }}</div>
+                <span class="price">{{ product.price|price|raw }}</span>
+                <div>
+                    <input type="hidden" name="selected-product" value="{{ product.id }}">
+                    <button id="add-to-cart-button" class="btn btn-success">Add to cart</button>
+                    <button id="get-cart-button" class="btn btn-warning">GET CART</button>
+                </div>
             </div>
         </div>
     </div>

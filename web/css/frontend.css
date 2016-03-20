@@ -1,0 +1,17 @@
+body {
+    background: gainsboro;
+}
+
+.product-tile {
+    background: white;
+}
+
+.product-actions {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.product-big-image {
+    display: block;
+    margin: 0 auto;
+}

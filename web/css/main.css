@@ -44,3 +44,7 @@
     width:auto;
     display:inline-block;
 }
+
+.panel h2 {
+    margin: 0;
+}
