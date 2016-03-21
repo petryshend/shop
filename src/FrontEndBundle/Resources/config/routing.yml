@@ -1,6 +1,10 @@
 front_end_homepage:
-    path:     /
+    path: /
     defaults: { _controller: FrontEndBundle:FrontEnd:index }
+
+front_end_category_page:
+    path: /category/{categoryName}
+    defaults: { _controller: FrontEndBundle:FrontEnd:categoryPage }
 
 front_end_product_page:
     path: /product/{id}
