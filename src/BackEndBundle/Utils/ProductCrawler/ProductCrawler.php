@@ -6,22 +6,19 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class ProductCrawler
 {
-    public function crawl($count = 1)
+    public function crawl(int $count = 1) : array
     {
         for ($i = 0; $i < $count; $i++) {
-            $randKey = array_rand(HotlineCategories::getAsArray());
-            $url = HotlineCategories::DOMAIN . HotlineCategories::getAsArray()[$randKey];
+            $randCategoryKey = array_rand(HotlineCategories::getAsArray());
+            $url = HotlineCategories::DOMAIN . HotlineCategories::getAsArray()[$randCategoryKey];
             $links = $this->getProductsLinks($url);
-            dump($links);die;
+            $randProductKey = array_rand($links);
+            $productInfo = $this->getRandomProductInfo(HotlineCategories::DOMAIN . $links[$randProductKey]);
         }
         return [];
     }
 
-    /**
-     * @param string $url
-     * @return \string[]
-     */
-    private function getProductsLinks($url)
+    private function getProductsLinks(string $url) : array
     {
         $links = [];
         $html = file_get_contents($url);
@@ -32,5 +29,12 @@ class ProductCrawler
             $links[] = $linkNode->attr('href');
         }
         return $links;
+    }
+
+    private function getRandomProductInfo(string $url) : array
+    {
+        $html = file_get_contents($url);
+        dump($url);die;
+        return [];
     }
 }

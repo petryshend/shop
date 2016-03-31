@@ -11,14 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
-    /** @var string */
+    /** @var string[] */
     private $sortFields = ['id', 'name'];
 
-    /**-
-     * @param Request $request
-     * @return Response
-     */
-    public function listAction(Request $request)
+    public function listAction(Request $request) : Response
     {
         if (!$page = $request->get('page')) {
             $page = 1;
@@ -42,11 +38,7 @@ class CategoryController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function newAction(Request $request)
+    public function newAction(Request $request) : Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -63,12 +55,7 @@ class CategoryController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @param int $id
-     * @return RedirectResponse|Response
-     */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $id) : Response
     {
         $category = $this->findCategory($id);
 
@@ -88,11 +75,7 @@ class CategoryController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request) : RedirectResponse
     {
         $categoryId = $request->get('category_id');
         $category = $this->findCategory($categoryId);
@@ -102,11 +85,7 @@ class CategoryController extends Controller
         return $this->redirectToRoute('back_end_category_list');
     }
 
-    /**
-     * @param int $id
-     * @return Category
-     */
-    private function findCategory($id)
+    private function findCategory(int $id) : Category
     {
         $category = $this->getDoctrine()
             ->getRepository('BackEndBundle:Category')
@@ -119,9 +98,6 @@ class CategoryController extends Controller
         return $category;
     }
 
-    /**
-     * @param Category $category
-     */
     private function persistCategory(Category $category)
     {
         $em = $this->getDoctrine()->getManager();
@@ -129,11 +105,7 @@ class CategoryController extends Controller
         $em->flush();
     }
 
-    /**
-     * @param Request $request
-     * @return string
-     */
-    private function getSortField($request)
+    private function getSortField(Request $request) : string
     {
         $sortField = 'id';
         if ($request->get('sort')) {

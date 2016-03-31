@@ -15,7 +15,7 @@ class HotlineCategories
     /**
      * @return string[]
      */
-    public static function getAsArray()
+    public static function getAsArray() : array
     {
         return [
             self::LAPTOPS,
