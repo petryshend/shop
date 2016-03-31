@@ -25,8 +25,7 @@ class CrawlProductsCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $count = $input->getArgument('count') ? intval($input->getArgument('count')) : 1;
-        dump($count);
-        $crawlResults = $this->getContainer()->get('product_crawler')->crawl();
+        $crawlResults = $this->getContainer()->get('product_crawler')->crawl($count);
         $output->writeln($crawlResults);
 
 
