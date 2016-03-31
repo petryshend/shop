@@ -36,7 +36,8 @@ class ProductCrawler
         $html = file_get_contents($url);
         $crawler = new Crawler($html);
         $productTitle = $this->stripTagsFromProductTitle($crawler->filter('.title-main')->html());
-        dump($productTitle);die;
+        $productDescription = $this->stripNewlinesAndSpaces($crawler->filter('.full-desc')->text());
+        dump($productDescription);die;
         return [];
     }
 
@@ -44,9 +45,13 @@ class ProductCrawler
     {
         $html = preg_replace('(<span\b[^>]*>(.*?)<\/span>)', '', $html);
         $html = preg_replace('(<div\b[^>]*>(.*?)<\/div>)', '', $html);
-        $html = preg_replace('/\\n/', '', $html);
-        $html = preg_replace('/\\t/', '', $html);
-        $html = trim($html);
-        return $html;
+        return $this->stripNewlinesAndSpaces($html);
+    }
+
+    private function stripNewlinesAndSpaces(string $str) : string
+    {
+        $str = preg_replace('/\\n/', '', $str);
+        $str = preg_replace('/\\t/', '', $str);
+        return trim($str);
     }
 }
