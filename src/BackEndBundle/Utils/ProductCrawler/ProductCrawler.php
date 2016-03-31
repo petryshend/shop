@@ -34,7 +34,19 @@ class ProductCrawler
     private function getRandomProductInfo(string $url) : array
     {
         $html = file_get_contents($url);
-        dump($url);die;
+        $crawler = new Crawler($html);
+        $productTitle = $this->stripTagsFromProductTitle($crawler->filter('.title-main')->html());
+        dump($productTitle);die;
         return [];
+    }
+
+    private function stripTagsFromProductTitle(string $html) : string
+    {
+        $html = preg_replace('(<span\b[^>]*>(.*?)<\/span>)', '', $html);
+        $html = preg_replace('(<div\b[^>]*>(.*?)<\/div>)', '', $html);
+        $html = preg_replace('/\\n/', '', $html);
+        $html = preg_replace('/\\t/', '', $html);
+        $html = trim($html);
+        return $html;
     }
 }
