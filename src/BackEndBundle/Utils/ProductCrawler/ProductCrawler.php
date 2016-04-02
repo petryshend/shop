@@ -7,6 +7,7 @@ use BackEndBundle\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use InvalidArgumentException;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ProductCrawler
@@ -22,21 +23,24 @@ class ProductCrawler
     public function crawlProduct() : Product
     {
         $randCategoryKey = array_rand(HotlineCategories::getAsArray());
+        $selectedHotlineCategory = HotlineCategories::getAsArray()[$randCategoryKey];
         $url = HotlineCategories::DOMAIN . HotlineCategories::getAsArray()[$randCategoryKey];
         $links = $this->getProductsLinks($url);
         $randProductKey = array_rand($links);
         $productInfo = $this->getRandomProductInfo(HotlineCategories::DOMAIN . $links[$randProductKey]);
+
+        if ($this->productExists($productInfo['name'])) {
+            throw new Exception(sprintf('Sorry, but %s already exists in database', $productInfo['name']));
+        }
 
         $product = new Product();
         $product->setName($productInfo['name']);
         $product->setDescription($productInfo['description']);
         $product->setPrice($productInfo['price']);
         $product->setImageUrl($productInfo['image']);
-        $selectedHotlineCategory = HotlineCategories::getAsArray()[$randCategoryKey];
+
         $categoryName = HotlineCategories::getMappingsToActualCategories()[$selectedHotlineCategory];
-        $category = $this->entityManager
-            ->getRepository(Category::class)
-            ->findOneBy(['name' => $categoryName]);
+        $category = $this->getCategoryForProduct($categoryName);
         if ($category === null) {
             throw new EntityNotFoundException(sprintf('There is no category %s in database', $categoryName));
         }
@@ -109,5 +113,24 @@ class ProductCrawler
         $priceLow = intval(str_replace('+AKA-', '', mb_convert_encoding(trim($priceLow), 'UTF-7')));
         $priceHigh = intval(str_replace('+AKA-', '', mb_convert_encoding(trim($priceHigh), 'UTF-7')));
         return ($priceLow + $priceHigh) / 2;
+    }
+
+    private function getCategoryForProduct(string $categoryName) : Category
+    {
+        $category = $this->entityManager
+            ->getRepository(Category::class)
+            ->findOneBy(['name' => $categoryName]);
+        return $category;
+    }
+
+    private function productExists(string $productName) : bool
+    {
+        $product = $this->entityManager
+            ->getRepository(Product::class)
+            ->findOneBy(['name' => $productName]);
+        if ($product === null) {
+            return false;
+        }
+        return true;
     }
 }
