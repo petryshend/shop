@@ -57,7 +57,7 @@ class FrontEndExtension extends \Twig_Extension
      */
     public function price($price)
     {
-        return sprintf('<span class="glyphicon glyphicon-usd"></span>%.2f', $price);
+        return sprintf('%.2f &#8372;', $price);
     }
 
     /**
