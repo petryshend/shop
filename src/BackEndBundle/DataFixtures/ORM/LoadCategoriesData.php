@@ -9,7 +9,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterface
 {
-    const CATEGORIES_COUNT = 5;
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -17,12 +16,22 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function load(ObjectManager $manager)
     {
+        $categoryNames = [
+            'smartphones',
+            'laptops',
+            'monitors',
+            'tablets',
+            'desktops',
+            'ebooks',
+            'graphic-cards',
+            'routers',
+        ];
         $categories = [];
-        for ($i = 0; $i < self::CATEGORIES_COUNT; $i++) {
+
+        foreach ($categoryNames as $categoryName) {
             $category = new Category();
-            $category->setName('Category ' . $i);
+            $category->setName($categoryName);
             $categories[] = $category;
-            $this->addReference('category' . $i, $category);
         }
 
         array_map(function($category) use ($manager) {

@@ -20,3 +20,4 @@ services:
 
     product_crawler:
         class: BackEndBundle\Utils\ProductCrawler\ProductCrawler
+        arguments: ["@doctrine.orm.default_entity_manager"]

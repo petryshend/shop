@@ -2,12 +2,23 @@
 
 namespace BackEndBundle\Utils\ProductCrawler;
 
+use BackEndBundle\Entity\Category;
 use BackEndBundle\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use InvalidArgumentException;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ProductCrawler
 {
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function crawlProduct() : Product
     {
         $randCategoryKey = array_rand(HotlineCategories::getAsArray());
@@ -21,6 +32,15 @@ class ProductCrawler
         $product->setDescription($productInfo['description']);
         $product->setPrice($productInfo['price']);
         $product->setImageUrl($productInfo['image']);
+        $selectedHotlineCategory = HotlineCategories::getAsArray()[$randCategoryKey];
+        $categoryName = HotlineCategories::getMappingsToActualCategories()[$selectedHotlineCategory];
+        $category = $this->entityManager
+            ->getRepository(Category::class)
+            ->findOneBy(['name' => $categoryName]);
+        if ($category === null) {
+            throw new EntityNotFoundException(sprintf('There is no category %s in database', $categoryName));
+        }
+        $product->setCategory($category);
 
         return $product;
     }

@@ -11,10 +11,10 @@ class HotlineCategories
     const DESKTOPS = '/computer/nastolnye-kompyutery/';
     const MONITORS = '/computer/monitory/';
     const SMARTPHONES = '/mobile/mobilnye-telefony-i-smartfony/';
+    const EBOOKS = '/computer/elektronnye-knigi/';
+    const GRAPHIC_CARDS = '/computer/videokarty/';
+    const ROUTERS = '/computer/besprovodnoe-oborudovanie/';
 
-    /**
-     * @return string[]
-     */
     public static function getAsArray() : array
     {
         return [
@@ -23,6 +23,23 @@ class HotlineCategories
             self::DESKTOPS,
             self::MONITORS,
             self::SMARTPHONES,
+            self::EBOOKS,
+            self::GRAPHIC_CARDS,
+            self::ROUTERS,
+        ];
+    }
+
+    public static function getMappingsToActualCategories() : array
+    {
+        return [
+            self::LAPTOPS => 'laptops',
+            self::TABLETS => 'tablets',
+            self::DESKTOPS => 'desktops',
+            self::MONITORS => 'monitors',
+            self::SMARTPHONES => 'smartphones',
+            self::EBOOKS => 'ebooks',
+            self::GRAPHIC_CARDS => 'graphic-cards',
+            self::ROUTERS => 'routers',
         ];
     }
 }
