@@ -2,21 +2,26 @@
 
 namespace BackEndBundle\Utils\ProductCrawler;
 
+use BackEndBundle\Entity\Product;
 use InvalidArgumentException;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ProductCrawler
 {
-    public function crawl(int $count = 1) : array
+    public function crawlProduct() : Product
     {
-        for ($i = 0; $i < $count; $i++) {
-            $randCategoryKey = array_rand(HotlineCategories::getAsArray());
-            $url = HotlineCategories::DOMAIN . HotlineCategories::getAsArray()[$randCategoryKey];
-            $links = $this->getProductsLinks($url);
-            $randProductKey = array_rand($links);
-            $productInfo = $this->getRandomProductInfo(HotlineCategories::DOMAIN . $links[$randProductKey]);
-        }
-        return [];
+        $randCategoryKey = array_rand(HotlineCategories::getAsArray());
+        $url = HotlineCategories::DOMAIN . HotlineCategories::getAsArray()[$randCategoryKey];
+        $links = $this->getProductsLinks($url);
+        $randProductKey = array_rand($links);
+        $productInfo = $this->getRandomProductInfo(HotlineCategories::DOMAIN . $links[$randProductKey]);
+
+        $product = new Product();
+        $product->setName($productInfo['name']);
+        $product->setDescription($productInfo['description']);
+        $product->setPrice($productInfo['price']);
+
+        return $product;
     }
 
     private function getProductsLinks(string $url) : array
@@ -36,16 +41,27 @@ class ProductCrawler
     {
         $html = file_get_contents($url);
         $crawler = new Crawler($html);
-        $productTitle = $this->stripTagsFromProductTitle($crawler->filter('.title-main')->html());
+        $productName = $this->stripTagsFromProductTitle($crawler->filter('.title-main')->html());
         $productDescription = $this->stripNewlinesAndSpaces($crawler->filter('.full-desc')->text());
+        $productPrice = $crawler->filter('.range-price strong');
         try {
-            $productPrice = $this->extractProductPrice($crawler->filter('.range-price strong')->html());
+            $productPrice = $this->getNumericPriceFromHTML($productPrice->html());
         } catch (InvalidArgumentException $ex) {
             // TODO: Log this
-            die(sprintf('There was a problem while getting price for %s. \nTherefore Abort.', $productTitle));
+            die(sprintf('There was a problem while getting price for %s. \nTherefore Abort.', $productName));
         }
-        
-        return [];
+        return [
+            'name' => $productName,
+            'description' => $productDescription,
+            'price' => $productPrice,
+        ];
+    }
+
+    private function getNumericPriceFromHTML(string $html) : int
+    {
+        $price = $this->stripTagsFromProductTitle($html);
+        $price = $this->stripNewlinesAndSpaces($price);
+        return $this->extractProductPrice($price);
     }
 
     private function stripTagsFromProductTitle(string $html) : string
