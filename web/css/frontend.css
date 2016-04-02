@@ -15,3 +15,7 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+.product-category-image {
+    min-height: 220px;
+}

@@ -20,6 +20,7 @@ class ProductCrawler
         $product->setName($productInfo['name']);
         $product->setDescription($productInfo['description']);
         $product->setPrice($productInfo['price']);
+        $product->setImageUrl($productInfo['image']);
 
         return $product;
     }
@@ -50,10 +51,13 @@ class ProductCrawler
             // TODO: Log this
             die(sprintf('There was a problem while getting price for %s. \nTherefore Abort.', $productName));
         }
+        $productImage = $crawler->filter('img.g_statistic')->attr('src');
+
         return [
             'name' => $productName,
             'description' => $productDescription,
             'price' => $productPrice,
+            'image' => HotlineCategories::DOMAIN.  $productImage,
         ];
     }
 
