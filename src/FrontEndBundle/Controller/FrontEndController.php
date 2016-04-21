@@ -13,7 +13,7 @@ class FrontEndController extends Controller
     /**
      * @return Response
      */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $products = $this->getAllProducts();
         $categories = $this->getAllCategories();
@@ -31,7 +31,7 @@ class FrontEndController extends Controller
      * @param $categoryName
      * @return Response|NotFoundHttpException
      */
-    public function categoryPageAction($categoryName)
+    public function categoryPageAction($categoryName) : Response
     {
         $category = $this->getDoctrine()
             ->getRepository('BackEndBundle:Category')
@@ -61,7 +61,7 @@ class FrontEndController extends Controller
      * @param int $id
      * @return Response
      */
-    public function productPageAction($id)
+    public function productPageAction($id) : Response
     {
         $em = $this->getDoctrine()->getManager();
         $product = $em->find('BackEndBundle:Product', $id);
@@ -76,7 +76,7 @@ class FrontEndController extends Controller
     /**
      * @return Product[]
      */
-    private function getAllProducts()
+    private function getAllProducts() : array
     {
         return $this->getDoctrine()
             ->getRepository('BackEndBundle:Product')
@@ -86,7 +86,7 @@ class FrontEndController extends Controller
     /**
      * @return Category[]
      */
-    private function getAllCategories()
+    private function getAllCategories() : array
     {
         return $this->getDoctrine()
             ->getRepository('BackEndBundle:Category')

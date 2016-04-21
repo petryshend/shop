@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
      * @return Response
      */
-    public function listAction()
+    public function listAction() : Response
     {
         $users = $this->getDoctrine()
             ->getRepository('BackEndBundle:User')
@@ -32,7 +32,7 @@ class UserController extends Controller
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request) : RedirectResponse
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -54,7 +54,7 @@ class UserController extends Controller
      * @param int $id
      * @return RedirectResponse|Response
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $id) : RedirectResponse
     {
         $user = $this->findUser($id);
 
@@ -76,7 +76,7 @@ class UserController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request) : RedirectResponse
     {
         $userId = $request->get('user_id');
         $user = $this->findUser($userId);
@@ -96,7 +96,11 @@ class UserController extends Controller
         $em->flush();
     }
 
-    private function findUser($id)
+    /**
+     * @param int $id
+     * @return User
+     */
+    private function findUser(int $id) : User
     {
         $user = $this->getDoctrine()
             ->getRepository('BackEndBundle:User')

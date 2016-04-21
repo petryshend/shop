@@ -14,6 +14,10 @@ class CategoryController extends Controller
     /** @var string[] */
     private $sortFields = ['id', 'name'];
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function listAction(Request $request) : Response
     {
         if (!$page = $request->get('page')) {
@@ -38,6 +42,10 @@ class CategoryController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function newAction(Request $request) : Response
     {
         $category = new Category();
@@ -55,6 +63,11 @@ class CategoryController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
     public function editAction(Request $request, $id) : Response
     {
         $category = $this->findCategory($id);
@@ -75,6 +88,10 @@ class CategoryController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function deleteAction(Request $request) : RedirectResponse
     {
         $categoryId = $request->get('category_id');
@@ -85,6 +102,10 @@ class CategoryController extends Controller
         return $this->redirectToRoute('back_end_category_list');
     }
 
+    /**
+     * @param int $id
+     * @return Category
+     */
     private function findCategory(int $id) : Category
     {
         $category = $this->getDoctrine()
@@ -98,6 +119,9 @@ class CategoryController extends Controller
         return $category;
     }
 
+    /**
+     * @param Category $category
+     */
     private function persistCategory(Category $category)
     {
         $em = $this->getDoctrine()->getManager();
@@ -105,6 +129,10 @@ class CategoryController extends Controller
         $em->flush();
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     */
     private function getSortField(Request $request) : string
     {
         $sortField = 'id';

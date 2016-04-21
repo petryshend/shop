@@ -3,10 +3,14 @@
 namespace BackEndBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller
 {
-    public function loginAction()
+    /**
+     * @return Response
+     */
+    public function loginAction() : Response
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 

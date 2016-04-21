@@ -9,13 +9,16 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartController extends Controller
 {
-    public function addToCartAction(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function addToCartAction(Request $request) : Response
     {
         $session = $request->getSession();
-
         $productId = $request->get('productId');
+        $productName = $request->get('productName');
         $quantity = intval($request->get('quantity'));
-
         $cartItems = json_decode($session->get('cart'), true);
 
         if (!$cartItems) {
@@ -29,7 +32,13 @@ class CartController extends Controller
         if ($key !== false) {
             $cartItems[$key]['quantity'] = intval($cartItems[$key]['quantity']) + 1;
         } else {
-            array_push($cartItems, ['productId' => $productId, 'quantity' => $quantity]);
+            array_push($cartItems,
+                [
+                    'productId' => $productId,
+                    'productName' => $productName,
+                    'quantity' => $quantity
+                ]
+            );
         }
 
         $updatedItems = json_encode($cartItems);
@@ -39,10 +48,13 @@ class CartController extends Controller
         return new Response('Item added');
     }
 
-    public function getCartAction(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getCartAction(Request $request) : Response
     {
         $session = $request->getSession();
-
         return new Response($session->get('cart'));
     }
 }

@@ -18,7 +18,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request) : Response
     {
         if (!$page = $request->get('page')) {
             $page = 1;
@@ -52,7 +52,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request) : RedirectResponse
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -74,7 +74,7 @@ class ProductController extends Controller
      * @param int $id
      * @return Response
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $id) : Response
     {
         $product = $this->findProduct($id);
 
@@ -98,7 +98,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request) : RedirectResponse
     {
         $productId = $request->get('product_id');
 
@@ -113,7 +113,7 @@ class ProductController extends Controller
      * @param int $id
      * @return Product
      */
-    private function findProduct($id)
+    private function findProduct($id) : Product
     {
         $product = $this->getDoctrine()
             ->getRepository('BackEndBundle:Product')
@@ -140,7 +140,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return string
      */
-    private function getSortField($request)
+    private function getSortField($request) : string
     {
         $sortField = 'id';
         if ($request->get('sort')) {
