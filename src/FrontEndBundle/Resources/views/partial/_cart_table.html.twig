@@ -1,0 +1,23 @@
+{% raw %}
+  <script id="cart-table-template" type="x-tmpl-mustache">
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>#</th>
+      <th>Price</th>
+    </thead>
+    <tbody>
+      {{ #items }}
+        <tr>
+          <td>{{ productName }}</td>
+          <td>{{ quantity }}</td>
+          <td>{{ productPrice }}</td>
+        </tr>
+      {{ /items }}
+      {{ ^items }}
+        Your cart is empty
+      {{ /items }}
+    </tbody>
+  </table>
+  </script>
+{% endraw %}

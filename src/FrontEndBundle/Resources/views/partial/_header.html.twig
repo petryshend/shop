@@ -1,9 +1,11 @@
 <nav class="navbar navbar-inverse">
   <a href="{{ path('front_end_homepage') }}" class="navbar-brand">The Shop</a>
   <!-- Button trigger cart modal -->
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Show cart
-  </button>
+  <ul class="navbar-right">
+    <button type="button" class="btn btn-default" id="show-cart-button" data-toggle="modal" data-target="#myModal">
+      <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+    </button>
+  </ul>
 </nav>
 
 <!-- Cart modal -->
@@ -14,9 +16,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      <div class="modal-body" id="cart-table">
-
-      </div>
+      <div class="modal-body" id="cart-table-placeholder"></div>
+      {% include '@FrontEnd/partial/_cart_table.html.twig' %}
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>

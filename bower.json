@@ -1,0 +1,22 @@
+{
+  "name": "shop",
+  "homepage": "https://github.com/petryshend/shop",
+  "authors": [
+    "petryshend <petryshend@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "wev/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "mustache.js": "mustache#^2.2.1"
+  }
+}

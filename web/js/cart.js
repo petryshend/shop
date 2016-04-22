@@ -2,12 +2,14 @@ $(function() {
     $('#add-to-cart-button').on('click', function() {
         var productId = $('input[name=selected-product-id]').val();
         var productName = $('input[name=selected-product-name]').val();
+        var productPrice = $('input[name=selected-product-price]').val();
         $.ajax({
             url: '/cart/add',
             type: 'POST',
             data: {
                 productId: productId,
                 productName: productName,
+                productPrice: productPrice,
                 quantity: 1
             }
         }).done(function(data) {
@@ -17,42 +19,25 @@ $(function() {
         });
     }) ;
 
-    $('#get-cart-button').on('click', function() {
+    $('#show-cart-button').on('click', function() {
         $.ajax({
             url: '/cart/get',
             type: 'POST'
         }).done(function(data) {
-            var tableHtml;
             if (data.length) {
-                tableHtml = createCartItemsTable(JSON.parse(data));
+                data = JSON.parse(data);
             } else {
-                tableHtml = '';
+                data = '';
             }
-            console.log(data);
-            $('#cart-table').html(tableHtml);
+            var template = $('#cart-table-template').html();
+            var rendered = Mustache.render(template,
+                {
+                    "items": data
+                }
+            );
+            $('#cart-table-placeholder').html(rendered);
         }).fail(function() {
             alert('fail');
         });
-
-        $('#myModal').modal('show');
     });
-
-    function createCartItemsTable(data) {
-        var table = $('<table></table>');
-        var tableHeader = $('<thead></thead>');
-        tableHeader.append($('<th>Id</th>'));
-        tableHeader.append($('<th>Name</th>'));
-        tableHeader.append($('<th>Quantity</th>'));
-        var tableBody = $('<tbody></tbody>');
-        $.each(data, function(index, row) {
-            var tableRow = $('<tr></tr>');
-            tableRow.append($('<td>' + row.productId + '</td>'));
-            tableRow.append($('<td>' + row.productName + '</td>'));
-            tableRow.append($('<td>' + row.quantity + '</td>'));
-            tableBody.append(tableRow);
-        });
-        table.append(tableHeader);
-        table.append(tableBody);
-        return table;
-    }
 });

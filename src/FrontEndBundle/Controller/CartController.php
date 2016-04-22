@@ -18,6 +18,7 @@ class CartController extends Controller
         $session = $request->getSession();
         $productId = $request->get('productId');
         $productName = $request->get('productName');
+        $productPrice = $request->get('productPrice');
         $quantity = intval($request->get('quantity'));
         $cartItems = json_decode($session->get('cart'), true);
 
@@ -36,7 +37,8 @@ class CartController extends Controller
                 [
                     'productId' => $productId,
                     'productName' => $productName,
-                    'quantity' => $quantity
+                    'productPrice' => $productPrice,
+                    'quantity' => $quantity,
                 ]
             );
         }
