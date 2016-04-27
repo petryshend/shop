@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "mustache.js": "mustache#^2.2.1"
+    "mustache.js": "mustache#^2.2.1",
+    "jquery-query-object": "^2.2.3"
   }
 }
