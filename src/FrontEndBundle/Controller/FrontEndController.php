@@ -52,7 +52,6 @@ class FrontEndController extends Controller
             [
                 'products' => $products,
                 'categories' => $categories,
-                'category' => $category
             ]
         );
     }
@@ -69,6 +68,7 @@ class FrontEndController extends Controller
             'FrontEndBundle::product.html.twig',
             [
                 'product' => $product,
+                'categories' => $this->getAllCategories(),
             ]
         );
     }

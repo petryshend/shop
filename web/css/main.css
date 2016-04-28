@@ -48,3 +48,7 @@
 .panel h2 {
     margin: 0;
 }
+
+#cartModal table {
+    color: black;
+}

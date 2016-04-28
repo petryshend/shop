@@ -1,26 +1,51 @@
-<nav class="navbar navbar-inverse">
-  <a href="{{ path('front_end_homepage') }}" class="navbar-brand">The Shop</a>
-  <!-- Button trigger cart modal -->
-  <ul class="navbar-right">
-    <button type="button" class="btn btn-raised btn-default" id="show-cart-button" data-toggle="modal" data-target="#myModal">
-      <span class="glyphicon glyphicon-shopping-cart"></span> Cart
-    </button>
-  </ul>
-</nav>
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('front_end_homepage') }}">The Shop</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Categories
+            <b class="caret"></b></a>
+          <ul class="dropdown-menu">
 
-<!-- Cart modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body" id="cart-table-placeholder"></div>
-      {% include '@FrontEnd/partial/_cart_table.html.twig' %}
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+            {% for category in categories %}
+              <li><a href="{{ path('front_end_category_page', {categoryName: category.name}) }}">
+                  {{ category.name }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <button type="button" class="btn btn-raised btn-default" id="show-cart-button" data-toggle="modal" data-target="#cartModal">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+        </button>
+      </ul>
+
+      <!-- Cart modal -->
+      <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body" id="cart-table-placeholder"></div>
+            {% include '@FrontEnd/partial/_cart_table.html.twig' %}
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
