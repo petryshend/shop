@@ -2,24 +2,5 @@
 
 {% block body %}
   {% include 'FrontEndBundle:partial:_header.html.twig' %}
-
-  {% set products_in_row = 4 %}
-  {% set max_columns = 12 %}
-  {% for i, product in products %}
-    {% if i % products_in_row == 0 %}
-      <div class="row">
-    {% endif %}
-    <div class="col-md-{{ (max_columns / products_in_row) | round }}">
-      <div class="product-tile">
-        {% set productImage = product.imageUrl ?: asset('img/no_image.jpg') %}
-        <img class="product-category-image"  src="{{ productImage }}" alt="{{ product.name }}">
-        <a href="{{ path('front_end_product_page', {'id': product.id}) }}">{{ product.name }}</a>
-        <div class="rating-stars">{{ product.rating|rating|raw }}</div>
-        <span class="price">{{ product.price|price|raw }}</span>
-      </div>
-    </div>
-    {% if i % products_in_row == products_in_row - 1 %}
-      </div>
-    {% endif %}
-  {% endfor %}
+  {% include '@FrontEnd/partial/_product_tiles.html.twig' %}
 {% endblock %}

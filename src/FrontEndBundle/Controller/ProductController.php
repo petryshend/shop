@@ -16,7 +16,7 @@ class ProductController extends Controller
         $products = $this->getAllProducts();
 
         return $this->render(
-            'FrontEndBundle::index.html.twig',
+            'FrontEndBundle::category.html.twig',
             [
                 'products' => $products,
             ]
