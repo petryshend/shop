@@ -1,14 +1,14 @@
 front_end_homepage:
     path: /
-    defaults: { _controller: FrontEndBundle:FrontEnd:index }
+    defaults: { _controller: FrontEndBundle:Product:index }
 
 front_end_category_page:
     path: /category/{categoryName}
-    defaults: { _controller: FrontEndBundle:FrontEnd:categoryPage }
+    defaults: { _controller: FrontEndBundle:Category:categoryPage }
 
 front_end_product_page:
     path: /product/{id}
-    defaults: { _controller: FrontEndBundle:FrontEnd:productPage }
+    defaults: { _controller: FrontEndBundle:Product:productPage }
 
 front_end_cart_add:
     path: /cart/add
@@ -21,3 +21,7 @@ front_end_cart_get:
     methods: [POST]
     defaults: { _controller: FrontEndBundle:Cart:getCart }
     condition: "request.isXMLHttpRequest()"
+
+front_end_checkout_cart_page:
+    path: /checkout/cart
+    defaults: { _controller: FrontEndBundle:Checkout:cartPage }

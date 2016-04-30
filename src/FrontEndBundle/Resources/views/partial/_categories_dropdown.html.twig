@@ -1,0 +1,8 @@
+<ul class="dropdown-menu">
+    {% for category in categories %}
+        <li><a href="{{ path('front_end_category_page', {categoryName: category.name}) }}">
+                {{ category.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

@@ -3,30 +3,12 @@
 namespace FrontEndBundle\Controller;
 
 use BackEndBundle\Entity\Category;
-use BackEndBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class FrontEndController extends Controller
+class CategoryController extends Controller
 {
-    /**
-     * @return Response
-     */
-    public function indexAction() : Response
-    {
-        $products = $this->getAllProducts();
-        $categories = $this->getAllCategories();
-
-        return $this->render(
-            'FrontEndBundle::index.html.twig',
-            [
-                'products' => $products,
-                'categories' => $categories,
-            ]
-        );
-    }
-
     /**
      * @param $categoryName
      * @return Response|NotFoundHttpException
@@ -55,32 +37,19 @@ class FrontEndController extends Controller
             ]
         );
     }
-
+    
     /**
-     * @param int $id
      * @return Response
      */
-    public function productPageAction($id) : Response
+    public function categoriesDropdownAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $product = $em->find('BackEndBundle:Product', $id);
+        $categories = $this->getAllCategories();
         return $this->render(
-            'FrontEndBundle::product.html.twig',
+            '@FrontEnd/partial/_categories_dropdown.html.twig',
             [
-                'product' => $product,
-                'categories' => $this->getAllCategories(),
+                'categories' => $categories,
             ]
         );
-    }
-
-    /**
-     * @return Product[]
-     */
-    private function getAllProducts() : array
-    {
-        return $this->getDoctrine()
-            ->getRepository('BackEndBundle:Product')
-            ->findAll();
     }
 
     /**
