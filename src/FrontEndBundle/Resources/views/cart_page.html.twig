@@ -3,5 +3,24 @@
 {% block body %}
     {% include 'FrontEndBundle:partial:_header.html.twig' %}
 
-    {{ dump(cart) }}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+                <tr>
+                    <td>{{ item.productName }}</td>
+                    <td>{{ item.productPrice}}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.productPrice * item.quantity }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

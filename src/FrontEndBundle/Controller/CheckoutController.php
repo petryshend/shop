@@ -8,7 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutController extends Controller
 {
-    public function cartPageAction(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function cartPageAction(Request $request) : Response
     {
         $cartContents = json_decode($request->getSession()->get('cart'));
         
