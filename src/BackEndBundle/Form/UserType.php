@@ -2,6 +2,7 @@
 
 namespace BackEndBundle\Form;
 
+use BackEndBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -38,7 +39,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'BackEndBundle\Entity\User',
+                'data_class' => User::class,
             ]
         );
     }

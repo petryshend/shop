@@ -2,32 +2,31 @@
 
 namespace BackEndBundle\Form;
 
-use BackEndBundle\Entity\Category;
+use BackEndBundle\Entity\OrderInfo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategoryType extends AbstractType
+class OrderInfoType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('first_name')
+            ->add('last_name')
+            ->add('country')
+            ->add('postcode')
+            ->add('address_line')
+            ->add('email_address')
+            ->add('phone_number')
         ;
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
-                'data_class' => Category::class,
+                'data_class' => OrderInfo::class
             ]
         );
     }
@@ -37,6 +36,6 @@ class CategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'category_type';
+        return 'order_info_type';
     }
 }

@@ -3,24 +3,29 @@
 {% block body %}
     {% include 'FrontEndBundle:partial:_header.html.twig' %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in cart %}
+        {% if cart is not empty %}
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ item.productName }}</td>
-                    <td>{{ item.productPrice}}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.productPrice * item.quantity }}</td>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                    <tr>
+                        <td>{{ item.productName }}</td>
+                        <td>{{ item.productPrice}}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.productPrice * item.quantity }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('front_end_checkout_order_info_page') }}">Continue checkout</a>
+    {% else %}
+        <h1>Your cart is empty</h1>
+    {% endif %}
 {% endblock %}

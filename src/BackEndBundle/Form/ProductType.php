@@ -2,6 +2,7 @@
 
 namespace BackEndBundle\Form;
 
+use BackEndBundle\Entity\Product;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -38,7 +39,7 @@ class ProductType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'BackEndBundle\Entity\Product',
+                'data_class' => Product::class,
             ]
         );
     }

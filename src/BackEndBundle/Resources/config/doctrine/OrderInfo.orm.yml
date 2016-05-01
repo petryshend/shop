@@ -1,0 +1,32 @@
+BackEndBundle\Entity\OrderInfo:
+    type: entity
+    table: null
+    repositoryClass: BackEndBundle\Repository\OrderInfoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        first_name:
+            type: string
+            length: 255
+        last_name:
+            type: string
+            length: 255
+        country:
+            type: string
+            length: 255
+        postcode:
+            type: string
+            length: 12
+        address_line:
+            type: string
+            length: 255
+        email_address:
+            type: string
+            length: 255
+        phone_number:
+            type: string
+            length: 255
