@@ -8,15 +8,11 @@
 
 .product-tile {
     height: 350px;
-    padding-left: 20px;
-    padding-right: 20px;
     margin-bottom: 10px;
-    border: 1px solid black;
 }
 
 .product-tile img {
     max-width: 100%;
-    padding-top: 10px;
     padding-bottom: 10px;
     display: block;
     margin: auto;
