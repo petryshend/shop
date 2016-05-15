@@ -28,13 +28,14 @@ class ProductCrawler
         $links = $this->getProductsLinks($url);
         $randProductKey = array_rand($links);
         $productInfo = $this->getRandomProductInfo(HotlineCategories::DOMAIN . $links[$randProductKey]);
+        $productName = trim(strip_tags($productInfo['name']));
 
-        if ($this->productExists($productInfo['name'])) {
-            throw new Exception(sprintf('Sorry, but %s already exists in database', $productInfo['name']));
+        if ($this->productExists($productName)) {
+            throw new Exception(sprintf('Sorry, but %s already exists in database', $productName));
         }
 
         $product = new Product();
-        $product->setName($productInfo['name']);
+        $product->setName($productName);
         $product->setDescription($productInfo['description']);
         $product->setPrice($productInfo['price']);
         $product->setImageUrl($productInfo['image']);
