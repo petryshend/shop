@@ -34,7 +34,8 @@ class CheckoutController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->persistOrderInfo($orderInfo);
-            $this->clearCart($request);
+            $request->getSession()->set('cart', null);
+            $request->getSession()->set('checkout_complete', true);
             return $this->redirectToRoute('front_end_checkout_complete_page');
         }
         
@@ -47,11 +48,16 @@ class CheckoutController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Response
      */
-    public function checkoutCompletePageAction()
+    public function checkoutCompletePageAction(Request $request)
     {
-        return $this->render('@FrontEnd/checkout_complete.html.twig');
+        if ($request->getSession()->get('checkout_complete')) {
+            $request->getSession()->set('checkout_complete', null);
+            return $this->render('@FrontEnd/checkout_complete.html.twig');
+        }
+        return $this->redirectToRoute('front_end_homepage');
     }
 
     /**
@@ -62,14 +68,5 @@ class CheckoutController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($orderInfo);
         $em->flush();
-    }
-
-    /**
-     * @param Request $request
-     */
-    private function clearCart(Request $request)
-    {
-        $session = $request->getSession();
-        $session->clear();
     }
 }
