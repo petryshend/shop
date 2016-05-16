@@ -29,3 +29,7 @@ front_end_checkout_cart_page:
 front_end_checkout_order_info_page:
     path: /checkout/order-info
     defaults: { _controller: FrontEndBundle:Checkout:orderInfoPage }
+
+front_end_checkout_complete_page:
+    path: /checkout/complete
+    defaults: { _controller: FrontEndBundle:Checkout:checkoutCompletePage }

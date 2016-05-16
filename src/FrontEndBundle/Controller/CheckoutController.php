@@ -34,7 +34,8 @@ class CheckoutController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->persistOrderInfo($orderInfo);
-            dump($orderInfo);die;
+            $this->clearCart($request);
+            return $this->redirectToRoute('front_end_checkout_complete_page');
         }
         
         return $this->render(
@@ -46,6 +47,14 @@ class CheckoutController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function checkoutCompletePageAction()
+    {
+        return $this->render('@FrontEnd/checkout_complete.html.twig');
+    }
+
+    /**
      * @param OrderInfo $orderInfo
      */
     private function persistOrderInfo(OrderInfo $orderInfo)
@@ -53,5 +62,14 @@ class CheckoutController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($orderInfo);
         $em->flush();
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function clearCart(Request $request)
+    {
+        $session = $request->getSession();
+        $session->clear();
     }
 }
