@@ -62,3 +62,7 @@ back_end_user_delete:
     path:     /user/delete
     methods: [POST]
     defaults: { _controller: BackEndBundle:User:delete }
+
+back_end_order_list:
+    path:     /order/list
+    defaults: { _controller: BackEndBundle:Order:list }

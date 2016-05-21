@@ -47,6 +47,11 @@ class OrderInfo
      */
     private $phone_number;
 
+    /**
+     * @var \BackEndBundle\Entity\Order
+     */
+    private $order;
+
 
     /**
      * Get id
@@ -225,5 +230,28 @@ class OrderInfo
     {
         return $this->phone_number;
     }
-}
 
+    /**
+     * Set order
+     *
+     * @param \BackEndBundle\Entity\Order $order
+     *
+     * @return OrderInfo
+     */
+    public function setOrder(\BackEndBundle\Entity\Order $order = null)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \BackEndBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+}

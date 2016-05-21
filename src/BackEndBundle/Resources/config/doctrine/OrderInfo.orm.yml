@@ -30,3 +30,7 @@ BackEndBundle\Entity\OrderInfo:
         phone_number:
             type: string
             length: 255
+    oneToOne:
+        order:
+            targetEntity: Order
+            inversedBy: orderInfo

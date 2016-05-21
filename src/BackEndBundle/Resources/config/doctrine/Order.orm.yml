@@ -1,0 +1,18 @@
+BackEndBundle\Entity\Order:
+    type: entity
+    table: orders
+    repositoryClass: BackEndBundle\Repository\OrderRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        orderInfo:
+            targetEntity: BackEndBundle\Entity\OrderInfo
+            mappedBy: order
+    oneToMany:
+        orderItems:
+            targetEntity: OrderItem
+            mappedBy: order

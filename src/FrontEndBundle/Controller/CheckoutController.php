@@ -2,7 +2,10 @@
 
 namespace FrontEndBundle\Controller;
 
+use BackEndBundle\Entity\Order;
 use BackEndBundle\Entity\OrderInfo;
+use BackEndBundle\Entity\OrderItem;
+use BackEndBundle\Entity\Product;
 use BackEndBundle\Form\OrderInfoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +36,20 @@ class CheckoutController extends Controller
         $form = $this->createForm(OrderInfoType::class, $orderInfo);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->persistOrderInfo($orderInfo);
+            $order = new Order();
+            $orderInfo->setOrder($order);
+            $order->setOrderInfo($orderInfo);
+            $orderItems = $this->createOrderItemsFromCart($request->getSession()->get('cart'));
+            $em = $this->getDoctrine()->getManager();
+            foreach ($orderItems as $orderItem) {
+                $orderItem->setOrder($order);
+                $em->persist($orderItem);
+                $order->addOrderItem($orderItem);
+            }
+            $em->persist($orderInfo);
+            $em->persist($order);
+            $em->flush();
+
             $request->getSession()->set('cart', null);
             $request->getSession()->set('checkout_complete', true);
             return $this->redirectToRoute('front_end_checkout_complete_page');
@@ -61,12 +77,21 @@ class CheckoutController extends Controller
     }
 
     /**
-     * @param OrderInfo $orderInfo
+     * @param string $cart
+     * @return OrderItem[]
      */
-    private function persistOrderInfo(OrderInfo $orderInfo)
+    private function createOrderItemsFromCart(string $cart): array
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($orderInfo);
-        $em->flush();
+        $orderItems = [];
+        $cart = json_decode($cart);
+        foreach ($cart as $item) {
+            $orderItem = new OrderItem();
+            $product = $this->getDoctrine()->getRepository(Product::class)->find($item->productId);
+            $orderItem->setProductId($product->getId());
+            $orderItem->setQuantity($item->quantity);
+            $orderItems[] = $orderItem;
+        }
+        
+        return $orderItems;
     }
 }

@@ -1,0 +1,23 @@
+BackEndBundle\Entity\OrderItem:
+    type: entity
+    table: null
+    repositoryClass: BackEndBundle\Repository\OrderItemRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        productId:
+            type: integer
+            nullable: false
+        quantity:
+            type: integer
+            nullable: false
+    manyToOne:
+        order:
+            targetEntity: BackEndBundle\Entity\Order
+            inversedBy: orderItems
+    lifecycleCallbacks: { }
+
