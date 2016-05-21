@@ -40,7 +40,7 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
         }, $categories);
     }
 
-    public function getOrder()
+    public function getOrder(): int
     {
         return 10;
     }

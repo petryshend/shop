@@ -9,10 +9,7 @@ class FrontEndExtension extends \Twig_Extension
 {
     /** @var Container */
     private $container;
-
-    /**
-     * @param Container $container
-     */
+    
     public function __construct(Container $container)
     {
         $this->container = $container;
@@ -21,7 +18,7 @@ class FrontEndExtension extends \Twig_Extension
     /**
      * @return Twig_SimpleFilter[]
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new Twig_SimpleFilter('rating', [$this, 'rating']),
@@ -29,11 +26,7 @@ class FrontEndExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @param int $rating
-     * @return string
-     */
-    public function rating($rating, $ratingsCount = 0)
+    public function rating($rating, $ratingsCount = 0): string
     {
         $html = '';
         for ($i = 0; $i < $rating; $i++) {
@@ -51,19 +44,12 @@ class FrontEndExtension extends \Twig_Extension
         return $html;
     }
 
-    /**
-     * @param $price
-     * @return string
-     */
-    public function price($price)
+    public function price(float $price): string
     {
         return sprintf('%.2f &#8372;', $price);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'frontend_extension';
     }

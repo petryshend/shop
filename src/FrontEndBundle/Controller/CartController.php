@@ -9,11 +9,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function addToCartAction(Request $request) : Response
+    public function addToCartAction(Request $request): Response
     {
         $session = $request->getSession();
         $productId = $request->get('productId');
@@ -50,11 +46,7 @@ class CartController extends Controller
         return new Response('Item added');
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function getCartAction(Request $request) : Response
+    public function getCartAction(Request $request): Response
     {
         $session = $request->getSession();
         return new Response($session->get('cart'));

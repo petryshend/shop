@@ -13,11 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function cartPageAction(Request $request) : Response
+    public function cartPageAction(Request $request): Response
     {
         $cartContents = json_decode($request->getSession()->get('cart'));
         return $this->render(
@@ -26,11 +22,7 @@ class CheckoutController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function orderInfoPageAction(Request $request)
+    public function orderInfoPageAction(Request $request): Response
     {
         $orderInfo = new OrderInfo();
         $form = $this->createForm(OrderInfoType::class, $orderInfo);
@@ -63,11 +55,7 @@ class CheckoutController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function checkoutCompletePageAction(Request $request)
+    public function checkoutCompletePageAction(Request $request): Response
     {
         if ($request->getSession()->get('checkout_complete')) {
             $request->getSession()->set('checkout_complete', null);

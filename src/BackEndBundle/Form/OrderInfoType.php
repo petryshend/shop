@@ -31,10 +31,7 @@ class OrderInfoType extends AbstractType
         );
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'order_info_type';
     }

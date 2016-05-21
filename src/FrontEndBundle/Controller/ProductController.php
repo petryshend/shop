@@ -8,10 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-    /**
-     * @return Response
-     */
-    public function indexAction() : Response
+    public function indexAction(): Response
     {
         $products = $this->getAllProducts();
 
@@ -23,11 +20,7 @@ class ProductController extends Controller
         );
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     */
-    public function productPageAction($id) : Response
+    public function productPageAction(int $id): Response
     {
         $em = $this->getDoctrine()->getManager();
         $product = $em->find('BackEndBundle:Product', $id);
@@ -42,7 +35,7 @@ class ProductController extends Controller
     /**
      * @return Product[]
      */
-    private function getAllProducts() : array
+    private function getAllProducts(): array
     {
         return $this->getDoctrine()
             ->getRepository('BackEndBundle:Product')

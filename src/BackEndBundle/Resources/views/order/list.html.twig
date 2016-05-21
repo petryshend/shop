@@ -1,0 +1,31 @@
+{% extends '@BackEnd/backend_base.html.twig' %}
+
+{% block body %}
+    {% include 'BackEndBundle:partial:_header.html.twig' %}
+
+    <table class="table">
+        <thead>
+            <th>Id</th>
+            <th>Customer Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                 <tr>
+                     <td>{{ order.id }}</td>
+                     <td>{{ order.orderInfo.firstName ~ ' ' ~ order.orderInfo.lastName }}</td>
+                     <td>{{ order.orderInfo.phoneNumber }}</td>
+                     <td>{{ order.orderInfo.emailAddress }}</td>
+                     <td>{{ getOrderTotal(order.orderItems) }}</td>
+                     <td>
+                         <button>Change status</button>
+                     </td>
+                 </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

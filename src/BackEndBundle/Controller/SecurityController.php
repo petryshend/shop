@@ -7,10 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller
 {
-    /**
-     * @return Response
-     */
-    public function loginAction() : Response
+    public function loginAction(): Response
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 

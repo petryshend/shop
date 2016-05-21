@@ -11,10 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    /**
-     * @return Response
-     */
-    public function listAction()
+    public function listAction(): Response
     {
         $users = $this->getDoctrine()
             ->getRepository('BackEndBundle:User')
@@ -28,11 +25,7 @@ class UserController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function newAction(Request $request)
+    public function newAction(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -49,12 +42,7 @@ class UserController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @param int $id
-     * @return RedirectResponse|Response
-     */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, int $id): Response
     {
         $user = $this->findUser($id);
 
@@ -72,11 +60,7 @@ class UserController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request): Response
     {
         $userId = $request->get('user_id');
         $user = $this->findUser($userId);
@@ -85,10 +69,7 @@ class UserController extends Controller
         $em->flush();
         return $this->redirectToRoute('back_end_user_list');
     }
-
-    /**
-     * @param User $user
-     */
+    
     private function persistUser(User $user)
     {
         $em = $this->getDoctrine()->getManager();
@@ -96,11 +77,7 @@ class UserController extends Controller
         $em->flush();
     }
 
-    /**
-     * @param int $id
-     * @return User
-     */
-    private function findUser(int $id)
+    private function findUser(int $id): User
     {
         $user = $this->getDoctrine()
             ->getRepository('BackEndBundle:User')

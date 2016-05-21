@@ -14,11 +14,7 @@ class ProductController extends Controller
     /** @var string[] */
     private $sortFields = ['id', 'name', 'category', 'rating', 'price'];
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function listAction(Request $request)
+    public function listAction(Request $request): Response
     {
         if (!$page = $request->get('page')) {
             $page = 1;
@@ -47,12 +43,8 @@ class ProductController extends Controller
             ]
         );
     }
-
-    /**
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function newAction(Request $request)
+    
+    public function newAction(Request $request): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -69,12 +61,7 @@ class ProductController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, int $id): Response
     {
         $product = $this->findProduct($id);
 
@@ -94,11 +81,7 @@ class ProductController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request): Response
     {
         $productId = $request->get('product_id');
 
@@ -109,11 +92,7 @@ class ProductController extends Controller
         return $this->redirectToRoute('back_end_product_list');
     }
 
-    /**
-     * @param int $id
-     * @return Product
-     */
-    private function findProduct($id)
+    private function findProduct(int $id): Product
     {
         $product = $this->getDoctrine()
             ->getRepository('BackEndBundle:Product')
@@ -126,9 +105,6 @@ class ProductController extends Controller
         return $product;
     }
 
-    /**
-     * @param Product $product
-     */
     private function persistProduct(Product $product)
     {
         $em = $this->getDoctrine()->getManager();
@@ -136,11 +112,7 @@ class ProductController extends Controller
         $em->flush();
     }
 
-    /**
-     * @param Request $request
-     * @return string
-     */
-    private function getSortField($request)
+    private function getSortField(Request $request): string
     {
         $sortField = 'id';
         if ($request->get('sort')) {

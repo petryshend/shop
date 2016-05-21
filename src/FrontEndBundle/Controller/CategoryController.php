@@ -9,11 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategoryController extends Controller
 {
-    /**
-     * @param $categoryName
-     * @return Response|NotFoundHttpException
-     */
-    public function categoryPageAction($categoryName) : Response
+    public function categoryPageAction(string $categoryName): Response
     {
         $category = $this->getDoctrine()
             ->getRepository('BackEndBundle:Category')
@@ -38,10 +34,7 @@ class CategoryController extends Controller
         );
     }
     
-    /**
-     * @return Response
-     */
-    public function categoriesDropdownAction()
+    public function categoriesDropdownAction(): Response
     {
         $categories = $this->getAllCategories();
         return $this->render(
@@ -55,7 +48,7 @@ class CategoryController extends Controller
     /**
      * @return Category[]
      */
-    private function getAllCategories() : array
+    private function getAllCategories(): array
     {
         return $this->getDoctrine()
             ->getRepository('BackEndBundle:Category')

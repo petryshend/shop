@@ -20,7 +20,7 @@ class ProductCrawler
         $this->entityManager = $entityManager;
     }
 
-    public function crawlProduct() : Product
+    public function crawlProduct(): Product
     {
         $randCategoryKey = array_rand(HotlineCategories::getAsArray());
         $selectedHotlineCategory = HotlineCategories::getAsArray()[$randCategoryKey];
@@ -50,7 +50,7 @@ class ProductCrawler
         return $product;
     }
 
-    private function getProductsLinks(string $url) : array
+    private function getProductsLinks(string $url): array
     {
         $links = [];
         $html = file_get_contents($url);
@@ -63,7 +63,7 @@ class ProductCrawler
         return $links;
     }
 
-    private function getRandomProductInfo(string $url) : array
+    private function getRandomProductInfo(string $url): array
     {
         $html = file_get_contents($url);
         $crawler = new Crawler($html);
@@ -86,28 +86,28 @@ class ProductCrawler
         ];
     }
 
-    private function getNumericPriceFromHTML(string $html) : int
+    private function getNumericPriceFromHTML(string $html): int
     {
         $price = $this->stripTagsFromProductTitle($html);
         $price = $this->stripNewlinesAndSpaces($price);
         return $this->extractProductPrice($price);
     }
 
-    private function stripTagsFromProductTitle(string $html) : string
+    private function stripTagsFromProductTitle(string $html): string
     {
         $html = preg_replace('(<span\b[^>]*>(.*?)<\/span>)', '', $html);
         $html = preg_replace('(<div\b[^>]*>(.*?)<\/div>)', '', $html);
         return $this->stripNewlinesAndSpaces($html);
     }
 
-    private function stripNewlinesAndSpaces(string $str) : string
+    private function stripNewlinesAndSpaces(string $str): string
     {
         $str = preg_replace('/\\n/', '', $str);
         $str = preg_replace('/\\t/', '', $str);
         return trim($str);
     }
 
-    private function extractProductPrice(string $stringPrice) : int
+    private function extractProductPrice(string $stringPrice): int
     {
         list($priceLow, $priceHigh) = explode('–', $stringPrice);
         // Get rid of special characters in price string and cast it to int
@@ -116,7 +116,7 @@ class ProductCrawler
         return ($priceLow + $priceHigh) / 2;
     }
 
-    private function getCategoryForProduct(string $categoryName) : Category
+    private function getCategoryForProduct(string $categoryName): Category
     {
         $category = $this->entityManager
             ->getRepository(Category::class)
@@ -124,7 +124,7 @@ class ProductCrawler
         return $category;
     }
 
-    private function productExists(string $productName) : bool
+    private function productExists(string $productName): bool
     {
         $product = $this->entityManager
             ->getRepository(Product::class)

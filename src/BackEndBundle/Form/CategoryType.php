@@ -9,20 +9,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoryType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
         ;
     }
-
-    /**
-     * @param OptionsResolver $resolver
-     */
+    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
@@ -32,10 +25,7 @@ class CategoryType extends AbstractType
         );
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'category_type';
     }
