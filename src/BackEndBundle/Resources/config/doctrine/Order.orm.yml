@@ -8,6 +8,10 @@ BackEndBundle\Entity\Order:
             id: true
             generator:
                 strategy: AUTO
+    fields:
+        status:
+            type: string
+            length: 255
     oneToOne:
         orderInfo:
             targetEntity: BackEndBundle\Entity\OrderInfo

@@ -7,6 +7,10 @@ namespace BackEndBundle\Entity;
  */
 class Order
 {
+    const STATUS_PLACED = 'placed';
+    const STATUS_SHIPPED = 'shipped';
+    const STATUS_CANCELLED = 'cancelled';
+
     /**
      * @var integer
      */
@@ -21,6 +25,10 @@ class Order
      * @var \Doctrine\Common\Collections\Collection
      */
     private $orderItems;
+    /**
+     * @var string
+     */
+    private $status = self::STATUS_PLACED;
 
     /**
      * Constructor
@@ -41,6 +49,16 @@ class Order
     }
 
     /**
+     * Get orderInfo
+     *
+     * @return \BackEndBundle\Entity\OrderInfo
+     */
+    public function getOrderInfo()
+    {
+        return $this->orderInfo;
+    }
+
+    /**
      * Set orderInfo
      *
      * @param \BackEndBundle\Entity\OrderInfo $orderInfo
@@ -52,16 +70,6 @@ class Order
         $this->orderInfo = $orderInfo;
 
         return $this;
-    }
-
-    /**
-     * Get orderInfo
-     *
-     * @return \BackEndBundle\Entity\OrderInfo
-     */
-    public function getOrderInfo()
-    {
-        return $this->orderInfo;
     }
 
     /**
@@ -96,5 +104,29 @@ class Order
     public function getOrderItems()
     {
         return $this->orderItems;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Order
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }
